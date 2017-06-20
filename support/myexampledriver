@@ -31,7 +31,7 @@ if [ -f /etc/default/$BASE ]; then
 fi
 
 # Check docker is present
-if [ ! -x $DKV_NETSHARE ]; then
+if [ ! -x $myexampledriver ]; then
 	log_failure_msg "$myexampledriver not present or not executable"
 	exit 1
 fi
