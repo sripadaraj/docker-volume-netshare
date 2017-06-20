@@ -2,13 +2,13 @@
 set -e
 
 ### BEGIN INIT INFO
-# Provides:           dkv-netshare
+# Provides:          myexampledriver
 # Required-Start:     $syslog $remote_fs $network
 # Required-Stop:      $syslog $remote_fs $network
 # Default-Start:      2 3 4 5
 # Default-Stop:       0 1 6
-# Short-Description:  Init for docker-volume-netshare
-# Description: Docker volume plugin supporting NFS, EFS and CIFS
+# Short-Description:  Init for myexampledriver
+# Description: Docker myexampledriver volume plugin 
 ### END INIT INFO
 
 export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
@@ -16,12 +16,12 @@ export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
 BASE=$(basename $0)
 
 # modify these in /etc/default/$BASE (/etc/default/dkv-netshare)
-DKV_NETSHARE=/usr/bin/$BASE
+myexampledriver=/usr/bin/$BASE
 # This is the pid file created/managed by start-stop-daemon
-DKV_NETSHARE_SSD_PIDFILE=/var/run/$BASE-ssd.pid
-DKV_NETSHARE_LOGFILE=/var/log/$BASE.log
-DKV_NETSHARE_OPTS=
-DKV_NETSHARE_DESC="Docker-Volume-Netshare"
+myexampledriver_SSD_PIDFILE=/var/run/$BASE-ssd.pid
+myexampledriver_LOGFILE=/var/log/$BASE.log
+myexampledriver_OPTS=
+myexampledriver_DESC="myexampledriver"
 
 # Get lsb functions
 . /lib/lsb/init-functions
@@ -32,13 +32,13 @@ fi
 
 # Check docker is present
 if [ ! -x $DKV_NETSHARE ]; then
-	log_failure_msg "$DKV_NETSHARE not present or not executable"
+	log_failure_msg "$myexampledriver not present or not executable"
 	exit 1
 fi
 
 fail_unless_root() {
 	if [ "$(id -u)" != '0' ]; then
-		log_failure_msg "$DKV_NETSHARE_DESC must be run as root"
+		log_failure_msg "$myexampledriver_DESC must be run as root"
 		exit 1
 	fi
 }
@@ -47,34 +47,34 @@ case "$1" in
 	start)
 		fail_unless_root
 
-		touch "$DKV_NETSHARE_LOGFILE"
-		chgrp docker "$DKV_NETSHARE_LOGFILE"
+		touch "$myexampledriver_LOGFILE"
+		chgrp docker "$myexampledriver_LOGFILE"
 
 		
-		log_begin_msg "Starting $DKV_NETSHARE_DESC: $BASE"
+		log_begin_msg "Starting $myexampledriver_DESC: $BASE"
 		start-stop-daemon --start --background \
 			--no-close \
-			--exec "$DKV_NETSHARE" \
-			--pidfile "$DKV_NETSHARE_SSD_PIDFILE" \
+			--exec "$myexampledriver" \
+			--pidfile "$myexampledriver_SSD_PIDFILE" \
 			--make-pidfile \
 			-- \
 				$DKV_NETSHARE_OPTS \
-					>> "$DKV_NETSHARE_LOGFILE" 2>&1
+					>> "$myexampledriver_LOGFILE" 2>&1
 		log_end_msg $?
 		;;
 
 	stop)
 		fail_unless_root
-		log_begin_msg "Stopping $DKV_NETSHARE_DESC: $BASE"
-		start-stop-daemon --stop --pidfile "$DKV_NETSHARE_SSD_PIDFILE"
+		log_begin_msg "Stopping $myexampledriver_DESC: $BASE"
+		start-stop-daemon --stop --pidfile "$myexampledriver_SSD_PIDFILE"
 		log_end_msg $?
 		;;
 
 	restart)
 		fail_unless_root
-		dkv_pid=`cat "$DKV_NETSHARE_SSD_PIDFILE" 2>/dev/null`
-		[ -n "$dkv_pid" ] \
-			&& ps -p $dkv_pid > /dev/null 2>&1 \
+		myexampledriver_pid=`cat "$myexampledriver_SSD_PIDFILE" 2>/dev/null`
+		[ -n "$myexampledriver_pid" ] \
+			&& ps -p $myexampledriver_pid > /dev/null 2>&1 \
 			&& $0 stop
 		$0 start
 		;;
@@ -85,7 +85,7 @@ case "$1" in
 		;;
 
 	status)
-		status_of_proc -p "$DKV_NETSHARE_SSD_PIDFILE" "$DKV_NETSHARE" "$DKV_NETSHARE_DESC"
+		status_of_proc -p "$myexampledriver_SSD_PIDFILE" "$myexampledriver" "$myexampledriver_DESC"
 		;;
 
 	*)
