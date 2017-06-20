@@ -28,13 +28,6 @@ const (
 	NetRCFlag        = "netrc"
 	TCPFlag          = "tcp"
 	PortFlag         = "port"
-	NameServerFlag   = "nameserver"
-	NameFlag         = "name"
-	SecretFlag       = "secret"
-	ContextFlag      = "context"
-	CephMount        = "sorcemount"
-	CephPort         = "port"
-	CephOpts         = "options"
 	ServerMount      = "servermount"
 	EnvSambaUser     = "NETSHARE_CIFS_USERNAME"
 	EnvSambaPass     = "NETSHARE_CIFS_PASSWORD"
@@ -45,14 +38,7 @@ const (
 	EnvNfsVers       = "NETSHARE_NFS_VERSION"
 	EnvTCP           = "NETSHARE_TCP_ENABLED"
 	EnvTCPAddr       = "NETSHARE_TCP_ADDR"
-	PluginAlias      = "netshare"
-	NetshareHelp     = `
-	docker-volume-netshare (NFS V3/4, AWS EFS and CIFS Volume Driver Plugin)
-
-Provides docker volume support for NFS v3 and 4, EFS as well as CIFS.  This plugin can be run multiple times to
-support different mount types.
-
-== Version: %s - Built: %s ==
+	PluginAlias      = "myexampl"
 	`
 )
 
