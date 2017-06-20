@@ -58,34 +58,16 @@ support different mount types.
 
 var (
 	rootCmd = &cobra.Command{
-		Use:              "docker-volume-netshare",
+		Use:              "myexampledriver",
 		Short:            "NFS and CIFS - Docker volume driver plugin",
 		Long:             NetshareHelp,
 		PersistentPreRun: setupLogger,
 	}
 
 	cifsCmd = &cobra.Command{
-		Use:   "cifs",
+		Use:   "switch",
 		Short: "run plugin in CIFS mode",
 		Run:   execCIFS,
-	}
-
-	nfsCmd = &cobra.Command{
-		Use:   "nfs",
-		Short: "run plugin in NFS mode",
-		Run:   execNFS,
-	}
-
-	efsCmd = &cobra.Command{
-		Use:   "efs",
-		Short: "run plugin in AWS EFS mode",
-		Run:   execEFS,
-	}
-
-	cephCmd = &cobra.Command{
-		Use:   "ceph",
-		Short: "run plugin in Ceph mode",
-		Run:   execCEPH,
 	}
 
 	versionCmd = &cobra.Command{
