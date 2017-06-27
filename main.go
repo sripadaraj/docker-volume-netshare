@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/dmaj/docker-volume-netshare/netshare"
+	"github.com/sripadaraj/dockyvolume/netshare"
 )
 
 var VERSION string = ""
