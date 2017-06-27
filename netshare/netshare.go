@@ -28,7 +28,6 @@ var (
 	rootCmd = &cobra.Command{
 		Use:              "docker-volume-netshare",
 		Short:            "NFS and CIFS - Docker volume driver plugin",
-		Long:             NetshareHelp,
 		PersistentPreRun: setupLogger,
 	}
 
@@ -42,13 +41,11 @@ var (
 
 func Execute() {
 	setupFlags()
-	rootCmd.Long = fmt.Sprintf(NetshareHelp, Version, BuildDate)
 	rootCmd.AddCommand(cifsCmd)
 	rootCmd.Execute()
 }
 
 func setupFlags() {
-	rootCmd.PersistentFlags().StringVar(&baseDir, BasedirFlag, filepath.Join(volume.DefaultDockerRootDirectory, PluginAlias), "Mounted volume base directory")
 	rootCmd.PersistentFlags().Bool(TCPFlag, false, "Bind to TCP rather than Unix sockets.  Can also be set via NETSHARE_TCP_ENABLED")
 	rootCmd.PersistentFlags().String(PortFlag, ":8877", "TCP Port if --tcp flag is true.  :PORT for all interfaces or ADDRESS:PORT to bind.")
 	rootCmd.PersistentFlags().Bool(VerboseFlag, false, "Turns on verbose logging")
